@@ -1,3 +1,4 @@
+from datetime import datetime
 subjects=[]
 study_sessions= []
 def show_menu():
@@ -8,8 +9,9 @@ def show_menu():
     print("1. Add subject")
     print("2. List subjects")
     print("3. Add study session")
-    print("4. Show statistics")
-    print("5. Exit")
+    print("4. View session")
+    print("5. Show statistics")
+    print("6. Exit")
 
 def add_subject():
     count=int(input("How many subjects do you want to add: "))
@@ -36,12 +38,12 @@ def add_study_session():
     for i, subject in enumerate(subjects, start=1):
         print(f"{i}. {subject}")
 
-    choice=int(input("Chose a subject: "))
-    while  choice<1 or choice>len(subjects):
+    session=int(input("Chose a subject: "))
+    while  session<1 or session>len(subjects):
         print("Invalid subject selection.")
-        choice=int(input("Chose a subject: "))
+        session=int(input("Chose a subject: "))
     
-    selected_subject= subjects[choice - 1]
+    selected_subject= subjects[session - 1]
     print(f"selected subject: {selected_subject}")
 
     duration=int(input("How many minutes did you study? "))
@@ -50,12 +52,30 @@ def add_study_session():
         duration=int(input("How many minutes did you study? "))
     print(f"You studied {duration} minutes for {selected_subject}.")
 
+    current_time=datetime.now()
     study_session ={
         "subject":selected_subject,
-        "duration":duration
+        "duration":duration,
+        "date":current_time.strftime("%d/%m/%Y"),
+        "time":current_time.strftime("%H:%M")
     }
     study_sessions.append(study_session)
     print("study session added succesfully.")
+
+def view_study_session():
+    
+    if not study_sessions:
+        print("No study session yet.")
+        return
+
+    print("STUDY SESSİONS".center(30,"="))
+    for sessions in study_sessions:
+        print(f"Subject: {sessions['subject']}")
+        print(f"Duration: {sessions['duration']}")
+        print(f"Date: {sessions['date']}")
+        print(f"Time: {sessions['time']}")
+        print("-"*30)
+
 
     
 
@@ -72,12 +92,16 @@ while True:
 
     elif choice == "3":
         add_study_session()
-
+        
     elif choice == "4":
-        print("Show statistics selected")
+        view_study_session()
 
     elif choice == "5":
-        print("Goodbye!")
-        break
+        print("a")
+
+    elif choice== "6":
+        print("GOODBYE!")
+        break 
+
     else:
         print("Invalid option!")
