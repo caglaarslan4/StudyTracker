@@ -1,5 +1,7 @@
 subjects=[]
+study_sessions= []
 def show_menu():
+
     print("***********************")
     print("     STUDY TRACKER     ")
     print("***********************")
@@ -10,9 +12,52 @@ def show_menu():
     print("5. Exit")
 
 def add_subject():
-    subject=input("Enter subject name: ")
-    subjects.append(subject)
-    print(f"{subject} added succesfully.")
+    count=int(input("How many subjects do you want to add: "))
+    for i in range(count):
+         subject=input("Enter subject name: ")
+         subjects.append(subject)
+         print(f"{subject} added succesfully.")
+
+def list_subjects():
+    if not subjects:
+        print("No subject added yet. Please you should add your subjects.")
+        return
+    
+    print("\n======== SUBJECTS ========")
+    for i, subject in enumerate(subjects, start=1):
+        print(f"{i}. {subject}")
+
+def add_study_session():
+    if not subjects:
+        print("No subjects added yet.")
+        return
+
+    print("ADD STUDY SESSİON".center(29,"="))
+    for i, subject in enumerate(subjects, start=1):
+        print(f"{i}. {subject}")
+
+    choice=int(input("Chose a subject: "))
+    while  choice<1 or choice>len(subjects):
+        print("Invalid subject selection.")
+        choice=int(input("Chose a subject: "))
+    
+    selected_subject= subjects[choice - 1]
+    print(f"selected subject: {selected_subject}")
+
+    duration=int(input("How many minutes did you study? "))
+    while duration<=0:
+        print("Invalid minutes selected.")
+        duration=int(input("How many minutes did you study? "))
+    print(f"You studied {duration} minutes for {selected_subject}.")
+
+    study_session ={
+        "subject":selected_subject,
+        "duration":duration
+    }
+    study_sessions.append(study_session)
+    print("study session added succesfully.")
+
+    
 
 while True:
     show_menu()
@@ -23,10 +68,10 @@ while True:
         add_subject()
 
     elif choice == "2":
-        print("List subeject selected")
+        list_subjects()
 
     elif choice == "3":
-        print("Add study session selected")
+        add_study_session()
 
     elif choice == "4":
         print("Show statistics selected")
