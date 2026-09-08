@@ -1,6 +1,12 @@
-from datetime import datetime
-subjects=[]
-study_sessions= []
+from study_manager import (
+    add_subject,
+    list_subjects,
+    add_study_session,
+    view_study_session
+
+)
+from stats import show_statistics
+
 def show_menu():
 
     print("***********************")
@@ -12,72 +18,6 @@ def show_menu():
     print("4. View session")
     print("5. Show statistics")
     print("6. Exit")
-
-def add_subject():
-    count=int(input("How many subjects do you want to add: "))
-    for i in range(count):
-         subject=input("Enter subject name: ")
-         subjects.append(subject)
-         print(f"{subject} added succesfully.")
-
-def list_subjects():
-    if not subjects:
-        print("No subject added yet. Please you should add your subjects.")
-        return
-    
-    print("\n======== SUBJECTS ========")
-    for i, subject in enumerate(subjects, start=1):
-        print(f"{i}. {subject}")
-
-def add_study_session():
-    if not subjects:
-        print("No subjects added yet.")
-        return
-
-    print("ADD STUDY SESSİON".center(29,"="))
-    for i, subject in enumerate(subjects, start=1):
-        print(f"{i}. {subject}")
-
-    session=int(input("Chose a subject: "))
-    while  session<1 or session>len(subjects):
-        print("Invalid subject selection.")
-        session=int(input("Chose a subject: "))
-    
-    selected_subject= subjects[session - 1]
-    print(f"selected subject: {selected_subject}")
-
-    duration=int(input("How many minutes did you study? "))
-    while duration<=0:
-        print("Invalid minutes selected.")
-        duration=int(input("How many minutes did you study? "))
-    print(f"You studied {duration} minutes for {selected_subject}.")
-
-    current_time=datetime.now()
-    study_session ={
-        "subject":selected_subject,
-        "duration":duration,
-        "date":current_time.strftime("%d/%m/%Y"),
-        "time":current_time.strftime("%H:%M")
-    }
-    study_sessions.append(study_session)
-    print("study session added succesfully.")
-
-def view_study_session():
-    
-    if not study_sessions:
-        print("No study session yet.")
-        return
-
-    print("STUDY SESSİONS".center(30,"="))
-    for sessions in study_sessions:
-        print(f"Subject: {sessions['subject']}")
-        print(f"Duration: {sessions['duration']}")
-        print(f"Date: {sessions['date']}")
-        print(f"Time: {sessions['time']}")
-        print("-"*30)
-
-
-    
 
 while True:
     show_menu()
@@ -97,7 +37,7 @@ while True:
         view_study_session()
 
     elif choice == "5":
-        print("a")
+        show_statistics()
 
     elif choice== "6":
         print("GOODBYE!")
