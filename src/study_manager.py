@@ -1,12 +1,14 @@
 from datetime import datetime
 from models import subjects, study_sessions
 from utils import get_integer
+from storage import save_data
 
 def add_subject():
     count=get_integer("How many subjects do you want to add: ")
     for i in range(count):
          subject=input("Enter subject name: ")
          subjects.append(subject)
+         save_data()
          print(f"{subject} added succesfully.")
 
 def list_subjects():
@@ -49,6 +51,7 @@ def add_study_session():
         "time":current_time.strftime("%H:%M")
     }
     study_sessions.append(study_session)
+    save_data()
     print("study session added succesfully.")
 
 def view_study_session():
@@ -64,3 +67,37 @@ def view_study_session():
         print(f"Date: {sessions['date']}")
         print(f"Time: {sessions['time']}")
         print("-"*30)
+
+def delete_subject():
+
+    if not subjects:
+        print("No subject available")
+        return
+
+    list_subjects()
+    chose_subject=get_integer("Which subject do you want to delete:")
+    if chose_subject<1 or chose_subject>len(subjects):
+        print("Invalid subject selection.")
+        return
+    subjects.pop(chose_subject - 1)
+    save_data()
+    print("Subject deleted successfully")
+
+def delete_study_session():
+    if not study_sessions:
+        print("No study session available.")
+        return
+    for i,session in enumerate(study_sessions, start=1):
+        print(f"{i}. {session['subject']} - {session['duration']} minutes - {session['date']} {session['time']}")
+
+    chose_session= get_integer("Which study session do you want to delete: ")
+    if chose_session<1 or chose_session>len(study_sessions):
+        print("Invalid study session selection.")
+        return
+    study_sessions.pop(chose_session - 1)
+    save_data()
+    print("Study session deleted successfully.")
+    
+
+
+
