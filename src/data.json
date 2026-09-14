@@ -1,0 +1,27 @@
+{
+    "subjects": [
+        "c",
+        "python",
+        "java"
+    ],
+    "study_sessions": [
+        {
+            "subject": "c",
+            "duration": 40,
+            "date": "14/09/2026",
+            "time": "22:22"
+        },
+        {
+            "subject": "python",
+            "duration": 80,
+            "date": "14/09/2026",
+            "time": "22:22"
+        },
+        {
+            "subject": "java",
+            "duration": 55,
+            "date": "14/09/2026",
+            "time": "22:23"
+        }
+    ]
+}

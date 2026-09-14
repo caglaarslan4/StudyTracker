@@ -4,7 +4,8 @@ from study_manager import (
     add_study_session,
     view_study_session,
     delete_subject,
-    delete_study_session
+    delete_study_session,
+     search_study_sessions
     
 
 )
@@ -24,7 +25,8 @@ def show_menu():
     print("5. Show statistics")
     print("6. Delete subject")
     print("7. Delete study session")
-    print("8. Exit")
+    print("8. Search study sessions")
+    print("9. Exit")
 
 load_data() 
 
@@ -54,7 +56,10 @@ while True:
     elif choice== "7":
         delete_study_session()
 
-    elif choice== "8": 
+    elif choice=="8":
+        search_study_sessions()
+
+    elif choice== "9": 
         print("GOODBYE!")  
         save_data()
         break

@@ -8,7 +8,7 @@ def save_data():
             "study_sessions":study_sessions
         }
 
-        json.dump(data,file)
+        json.dump(data, file, indent=4)
 
 def load_data():
     try:
@@ -16,10 +16,10 @@ def load_data():
           
           data= json.load(file)
           subjects.clear()
-          subjects.extend(data["subjects"])
+          subjects.extend(data.get("subjects", []))
 
           study_sessions.clear()
-          study_sessions.extend(data["study_sessions"])
+          study_sessions.extend(data.get("study_sessions",[]))
     except FileNotFoundError:
         print("No saved data found. Starting with empty data.")
     

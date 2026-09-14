@@ -4,9 +4,7 @@ def show_statistics():
     print("\n======== STATİSTİCS ========")
     print(f"Total number of subjects: {len(subjects)}")
 
-    total_minutes=0
-    for session in study_sessions:
-        total_minutes+= session["duration"]
+    total_minutes=total_study_time()
 
     print(f"Total study time: {total_minutes} minutes")
 

@@ -8,9 +8,9 @@ def add_subject():
     for i in range(count):
          subject=input("Enter subject name: ")
          subjects.append(subject)
-         save_data()
          print(f"{subject} added succesfully.")
-
+    save_data()
+    
 def list_subjects():
     if not subjects:
         print("No subject added yet. Please you should add your subjects.")
@@ -97,7 +97,25 @@ def delete_study_session():
     study_sessions.pop(chose_session - 1)
     save_data()
     print("Study session deleted successfully.")
-    
+
+def search_study_sessions():
+    search= input("Search subject: ").lower()
+    found=False
+    result=0
+    for session in study_sessions:
+        if search in session["subject"].lower():
+
+            print(f"Subject: {session['subject']}\nMinutes: {session['duration'] }\nDate: {session['date']}\nTime: {session['time']}" )
+            result+=1
+            found=True
+        
+    print(f"{result} result found.")
+    if not found:
+        print("No results found.")
+
+
+
+
 
 
 
